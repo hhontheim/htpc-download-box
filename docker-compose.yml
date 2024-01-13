@@ -20,6 +20,11 @@ services:
     image: linuxserver/deluge:latest
     restart: unless-stopped
     network_mode: service:vpn # run on the vpn network
+    # ports:
+    #   - 8112:8112
+    #   - 6881:6881
+    #   - 6881:6881/udp
+    #   - 58846:58846 #optional
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
@@ -32,7 +37,9 @@ services:
     container_name: jackett
     image: linuxserver/jackett:latest
     restart: unless-stopped
-    network_mode: host
+    # network_mode: host
+    ports:
+      - 9117:9117
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
@@ -46,7 +53,9 @@ services:
     container_name: nzbget
     image: linuxserver/nzbget:latest
     restart: unless-stopped
-    network_mode: host
+    # network_mode: host
+    ports:
+      - 6789:6789
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
@@ -59,7 +68,9 @@ services:
     container_name: sonarr
     image: linuxserver/sonarr:latest
     restart: unless-stopped
-    network_mode: host
+    # network_mode: host
+    ports:
+      - 8989:8989
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
@@ -69,12 +80,20 @@ services:
       - ${ROOT}/config/sonarr:/config # config files
       - ${ROOT}/complete/tv:/tv # tv shows folder
       - ${ROOT}/downloads:/downloads # download folder
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sonarr.rule=Host(`sonarr.local`)"
+      - "traefik.http.routers.sonarr.entrypoints=websecure"
+      # - "traefik.http.routers.sonarr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.sonarr.middlewares=chain-basic-auth@file"
 
   radarr:
     container_name: radarr
     image: linuxserver/radarr:latest
     restart: unless-stopped
-    network_mode: host
+    # network_mode: host
+    ports:
+      - 7878:7878
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
@@ -84,6 +103,26 @@ services:
       - ${ROOT}/config/radarr:/config # config files
       - ${ROOT}/complete/movies:/movies # movies folder
       - ${ROOT}/downloads:/downloads # download folder
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.radarr.rule=Host(`radarr.local`)"
+      - "traefik.http.routers.radarr.entrypoints=websecure"
+      # - "traefik.http.routers.radarr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.radarr.middlewares=chain-basic-auth@file"
+
+  overseerr:
+    container_name: overseerr
+    image: linuxserver/overseerr:latest
+    restart: unless-stopped
+    # network_mode: host
+    ports:
+      - 5055:5055
+    environment:
+      - PUID=${PUID} # default user id, defined in .env
+      - PGID=${PGID} # default group id, defined in .env
+      - TZ=${TZ} # timezone, defined in .env
+    volumes:
+      - ${ROOT}/config/overseerr:/config # config files
 
   plex-server:
     container_name: plex-server
@@ -101,7 +140,9 @@ services:
     container_name: bazarr
     image: linuxserver/bazarr
     restart: unless-stopped
-    network_mode: host
+    # network_mode: host
+    ports:
+      - 6767:6767
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
@@ -111,3 +152,7 @@ services:
       - ${ROOT}/config/bazarr:/config # config files
       - ${ROOT}/complete/movies:/movies # movies folder
       - ${ROOT}/complete/tv:/tv # tv shows folder
+
+# networks:
+#   link:
+#     external: true
