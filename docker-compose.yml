@@ -42,7 +42,7 @@ services:
       - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
       - TZ=${TZ} # timezone, defined in .env
     ports:
-          - 8191:8191
+      - 8191:8191
     restart: unless-stopped
 
   jackett:
