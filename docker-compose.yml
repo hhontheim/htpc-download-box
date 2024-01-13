@@ -20,11 +20,11 @@ services:
     image: linuxserver/deluge:latest
     restart: unless-stopped
     network_mode: service:vpn # run on the vpn network
-    ports:
-      - 8112:8112
-      - 6881:6881
-      - 6881:6881/udp
-      - 58846:58846 #optional
+    # ports:
+    #   - 8112:8112
+    #   - 6881:6881
+    #   - 6881:6881/udp
+    #   - 58846:58846 #optional
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
