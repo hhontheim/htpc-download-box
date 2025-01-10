@@ -1,4 +1,3 @@
-version: "3.4"
 services:
   # vpn:
   #   container_name: vpn
@@ -140,10 +139,13 @@ services:
 
   plex-server:
     container_name: plex-server
-    image: plexinc/pms-docker:latest
+    image: linuxserver/plex:latest
     restart: unless-stopped
     environment:
+      - PUID=${PUID} # default user id, defined in .env
+      - PGID=${PGID} # default group id, defined in .env
       - TZ=${TZ} # timezone, defined in .env
+      - VERSION=docker
     network_mode: host
     # ports:
     #   - 32400:32400/tcp
@@ -161,9 +163,8 @@ services:
     # #   # If you use Plex Web Tools
     # #   - 33400:33400
     volumes:
-      - ${ROOT}/config/plex/db:/config # plex database
-      - ${ROOT}/config/plex/transcode:/transcode # temp transcoded files
-      - ${ROOT}/complete:/data # media library
+      - ${ROOT}/config/plex:/config # plex database
+      - ${MEDIA}:/media # media library
 
   # bazarr:
   #   container_name: bazarr
