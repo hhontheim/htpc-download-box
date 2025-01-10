@@ -184,7 +184,7 @@ services:
 
 volumes:
   data:
-    name: htpc_data
+    name: ${ROOT}
     driver: local
     driver_opts:
       type: 'none'
