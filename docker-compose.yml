@@ -185,11 +185,12 @@ services:
 volumes:
   data:
     name: ${ROOT}
-    driver: local
-    driver_opts:
-      type: 'none'
-      o: 'bind'
-      device: '/volume1/docker/htpc/data'
+    external: true
+    # driver: local
+    # driver_opts:
+    #   type: 'none'
+    #   o: 'bind'
+    #   device: '/volume1/docker/htpc/data'
 
 # networks:
 #   link:
