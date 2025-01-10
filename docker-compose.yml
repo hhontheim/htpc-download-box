@@ -164,7 +164,7 @@ services:
     # #   - 33400:33400
     volumes:
       - ${ROOT}/config/plex:/config # plex database
-      - ${MEDIA}:/data:rw # media library
+      - ${MEDIA}:/media # media library
 
   # bazarr:
   #   container_name: bazarr
