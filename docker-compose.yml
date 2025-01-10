@@ -182,15 +182,15 @@ services:
   #     - ${ROOT}/complete/movies:/movies # movies folder
   #     - ${ROOT}/complete/tv:/tv # tv shows folder
 
-volumes:
-  data:
-    name: ${ROOT}
-    external: true
-    # driver: local
-    # driver_opts:
-    #   type: 'none'
-    #   o: 'bind'
-    #   device: '/volume1/docker/htpc/data'
+# volumes:
+#   htpc_data:
+#     name: ${ROOT}
+#     external: true
+#     # driver: local
+#     # driver_opts:
+#     #   type: 'none'
+#     #   o: 'bind'
+#     #   device: '/volume1/docker/htpc/data'
 
 # networks:
 #   link:
