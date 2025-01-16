@@ -16,23 +16,23 @@ services:
   #     - 8112:8112 # port for deluge web UI to be reachable from local network
   #   command: '-f "" -r 192.168.1.0/24' # enable firewall and route local network traffic
 
-  # deluge:
-  #   container_name: deluge
-  #   image: linuxserver/deluge:latest
-  #   restart: unless-stopped
-  #   # network_mode: service:vpn # run on the vpn network
-  #   ports:
-  #     - 8112:8112
-  #     - 6881:6881
-  #     - 6881:6881/udp
-  #     - 58846:58846 #optional
-  #   environment:
-  #     - PUID=${PUID} # default user id, defined in .env
-  #     - PGID=${PGID} # default group id, defined in .env
-  #     - TZ=${TZ} # timezone, defined in .env
-  #   volumes:
-  #     - ${ROOT}/downloads:/downloads # downloads folder
-  #     - ${ROOT}/config/deluge:/config # config files
+  deluge:
+    container_name: deluge
+    image: linuxserver/deluge:latest
+    restart: unless-stopped
+    # network_mode: service:vpn # run on the vpn network
+    ports:
+      - 8112:8112
+      - 6881:6881
+      - 6881:6881/udp
+      - 58846:58846 #optional
+    environment:
+      - PUID=${PUID} # default user id, defined in .env
+      - PGID=${PGID} # default group id, defined in .env
+      - TZ=${TZ} # timezone, defined in .env
+    volumes:
+      - ${ROOT}/downloads:/downloads # downloads folder
+      - ${ROOT}/config/deluge:/config # config files
 
   # flaresolverr:
   #   image: flaresolverr/flaresolverr:latest
