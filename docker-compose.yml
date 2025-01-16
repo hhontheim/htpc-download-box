@@ -62,20 +62,20 @@ services:
       - ${ROOT}/downloads/torrent-blackhole:/downloads # place where to put .torrent files for manual download
       - ${ROOT}/config/jackett:/config # config files
 
-  # nzbget:
-  #   container_name: nzbget
-  #   image: linuxserver/nzbget:latest
-  #   restart: unless-stopped
-  #   # network_mode: host
-  #   ports:
-  #     - 6789:6789
-  #   environment:
-  #     - PUID=${PUID} # default user id, defined in .env
-  #     - PGID=${PGID} # default group id, defined in .env
-  #     - TZ=${TZ} # timezone, defined in .env
-  #   volumes:
-  #     - ${ROOT}/downloads:/downloads # download folder
-  #     - ${ROOT}/config/nzbget:/config # config files
+  nzbget:
+    container_name: nzbget
+    image: linuxserver/nzbget:latest
+    restart: unless-stopped
+    # network_mode: host
+    ports:
+      - 6789:6789
+    environment:
+      - PUID=${PUID} # default user id, defined in .env
+      - PGID=${PGID} # default group id, defined in .env
+      - TZ=${TZ} # timezone, defined in .env
+    volumes:
+      - ${ROOT}/downloads:/downloads # download folder
+      - ${ROOT}/config/nzbget:/config # config files
 
   sonarr:
     container_name: sonarr
