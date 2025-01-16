@@ -100,22 +100,22 @@ services:
   #     # - "traefik.http.routers.sonarr.middlewares=chain-no-auth@file"
   #     - "traefik.http.routers.sonarr.middlewares=chain-basic-auth@file"
 
-  # radarr:
-  #   container_name: radarr
-  #   image: linuxserver/radarr:latest
-  #   restart: unless-stopped
-  #   # network_mode: host
-  #   ports:
-  #     - 7878:7878
-  #   environment:
-  #     - PUID=${PUID} # default user id, defined in .env
-  #     - PGID=${PGID} # default group id, defined in .env
-  #     - TZ=${TZ} # timezone, defined in .env
-  #   volumes:
-  #     - /etc/localtime:/etc/localtime:ro
-  #     - ${ROOT}/config/radarr:/config # config files
-  #     - ${ROOT}/complete/movies:/movies # movies folder
-  #     - ${ROOT}/downloads:/downloads # download folder
+  radarr:
+    container_name: radarr
+    image: linuxserver/radarr:latest
+    restart: unless-stopped
+    # network_mode: host
+    ports:
+      - 7878:7878
+    environment:
+      - PUID=${PUID} # default user id, defined in .env
+      - PGID=${PGID} # default group id, defined in .env
+      - TZ=${TZ} # timezone, defined in .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${ROOT}/config/radarr:/config # config files
+      - ${ROOT}/downloads:/downloads # download folder
+      - ${MEDIA}/movies:/movies # movies folder
   #   labels:
   #     - "traefik.enable=true"
   #     - "traefik.http.routers.radarr.rule=Host(`radarr.local`)"
