@@ -123,19 +123,19 @@ services:
   #     # - "traefik.http.routers.radarr.middlewares=chain-no-auth@file"
   #     - "traefik.http.routers.radarr.middlewares=chain-basic-auth@file"
 
-  # overseerr:
-  #   container_name: overseerr
-  #   image: linuxserver/overseerr:latest
-  #   restart: unless-stopped
-  #   # network_mode: host
-  #   ports:
-  #     - 5055:5055
-  #   environment:
-  #     - PUID=${PUID} # default user id, defined in .env
-  #     - PGID=${PGID} # default group id, defined in .env
-  #     - TZ=${TZ} # timezone, defined in .env
-  #   volumes:
-  #     - ${ROOT}/config/overseerr:/config # config files
+  overseerr:
+    container_name: overseerr
+    image: linuxserver/overseerr:latest
+    restart: unless-stopped
+    # network_mode: host
+    ports:
+      - 5055:5055
+    environment:
+      - PUID=${PUID} # default user id, defined in .env
+      - PGID=${PGID} # default group id, defined in .env
+      - TZ=${TZ} # timezone, defined in .env
+    volumes:
+      - ${ROOT}/config/overseerr:/config # config files
 
   plex-server:
     container_name: plex-server
