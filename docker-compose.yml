@@ -166,22 +166,22 @@ services:
       - ${ROOT}/config/plex:/config # plex database
       - ${MEDIA}:/media # media library
 
-  # bazarr:
-  #   container_name: bazarr
-  #   image: linuxserver/bazarr
-  #   restart: unless-stopped
-  #   # network_mode: host
-  #   ports:
-  #     - 6767:6767
-  #   environment:
-  #     - PUID=${PUID} # default user id, defined in .env
-  #     - PGID=${PGID} # default group id, defined in .env
-  #     - TZ=${TZ} # timezone, defined in .env
-  #     - UMASK_SET=022 #optional
-  #   volumes:
-  #     - ${ROOT}/config/bazarr:/config # config files
-  #     - ${ROOT}/complete/movies:/movies # movies folder
-  #     - ${ROOT}/complete/tv:/tv # tv shows folder
+  bazarr:
+    container_name: bazarr
+    image: linuxserver/bazarr
+    restart: unless-stopped
+    # network_mode: host
+    ports:
+      - 6767:6767
+    environment:
+      - PUID=${PUID} # default user id, defined in .env
+      - PGID=${PGID} # default group id, defined in .env
+      - TZ=${TZ} # timezone, defined in .env
+      - UMASK_SET=022 #optional
+    volumes:
+      - ${ROOT}/config/bazarr:/config # config files
+      - ${MEDIA}/movies:/movies # movies folder
+      - ${MEDIA}/tv:/tv # tv shows folder
 
 # volumes:
 #   htpc_data:
