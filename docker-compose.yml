@@ -46,21 +46,21 @@ services:
       - 8191:8191
     restart: unless-stopped
 
-  # jackett:
-  #   container_name: jackett
-  #   image: linuxserver/jackett:latest
-  #   restart: unless-stopped
-  #   # network_mode: host
-  #   ports:
-  #     - 9117:9117
-  #   environment:
-  #     - PUID=${PUID} # default user id, defined in .env
-  #     - PGID=${PGID} # default group id, defined in .env
-  #     - TZ=${TZ} # timezone, defined in .env
-  #   volumes:
-  #     - /etc/localtime:/etc/localtime:ro
-  #     - ${ROOT}/downloads/torrent-blackhole:/downloads # place where to put .torrent files for manual download
-  #     - ${ROOT}/config/jackett:/config # config files
+  jackett:
+    container_name: jackett
+    image: linuxserver/jackett:latest
+    restart: unless-stopped
+    # network_mode: host
+    ports:
+      - 9117:9117
+    environment:
+      - PUID=${PUID} # default user id, defined in .env
+      - PGID=${PGID} # default group id, defined in .env
+      - TZ=${TZ} # timezone, defined in .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${ROOT}/downloads/torrent-blackhole:/downloads # place where to put .torrent files for manual download
+      - ${ROOT}/config/jackett:/config # config files
 
   # nzbget:
   #   container_name: nzbget
